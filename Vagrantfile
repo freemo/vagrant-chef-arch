@@ -2,7 +2,8 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-  config.vm.box = "denis/archlinux64"
+  #config.vm.box = "denis/archlinux64"
+  config.vm.box = "ubuntu/trusty64"
 
   # config.vm.network "forwarded_port", guest: 80, host: 8080
 
@@ -44,4 +45,8 @@ Vagrant.configure(2) do |config|
   #   sudo apt-get update
   #   sudo apt-get install -y apache2
   # SHELL
+
+  config.vm.provision "chef_apply" do |chef|
+    chef.recipe = File.read("hello.rb")
+  end
 end
